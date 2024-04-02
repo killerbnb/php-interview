@@ -25,7 +25,13 @@ when player move order is wrong (e.g. if whites make two moves in a row).
 
 To verify your solution, run tests:
 
-    $ ./vendor/bin/phpunit --group=rotation
+```shell
+# Linux:
+$ ./vendor/bin/phpunit --group=rotation
+
+# Windows:
+> php ./vendor/phpunit/phpunit/phpunit --group=rotation
+```
 
 ## Task 2
 
@@ -34,7 +40,13 @@ when a pawn makes an illegal move.
 
 To verify your solution, run tests:
 
-    $ ./vendor/bin/phpunit --group=pawn
+```shell
+# Linux:
+$ ./vendor/bin/phpunit --group=pawn
+
+# Windows:
+> php ./vendor/phpunit/phpunit/phpunit --group=pawn
+```
 
 Tests only move pawns, other figures are not moved,
 so you are safe to ignore non-pawn specifics in your solution.
