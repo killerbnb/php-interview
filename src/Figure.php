@@ -1,6 +1,6 @@
 <?php
 
-class Figure
+abstract class Figure
 {
     protected $isBlack;
 
@@ -19,4 +19,6 @@ class Figure
     {
         return $this->isBlack;
     }
+
+    abstract public function checkMove(Path $path);
 }

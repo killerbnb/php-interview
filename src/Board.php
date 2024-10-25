@@ -60,6 +60,7 @@ class Board
             return;
         }
 
+        /** @var Figure $movingFigure */
         $movingFigure = $this->figures[$xFrom][$yFrom];
 
         $isBlackLastMoveFigure = isset($this->lastMoveFigure) ? $this->lastMoveFigure->isBlack() : true;
@@ -67,6 +68,16 @@ class Board
         if ($isBlackLastMoveFigure === $movingFigure->isBlack()) {
             throw new \Exception("Incorrect color");
         }
+
+        $movingFigure->checkMove(
+            new Path(
+                figures: $this->figures,
+                xFrom: $xFrom,
+                yFrom: $yFrom,
+                xTo: $xTo,
+                yTo: $yTo
+            )
+        );
 
         $this->lastMoveFigure = $movingFigure;
 
