@@ -4,7 +4,7 @@ class Board
 {
     private $figures = [];
 
-    private bool $lastMoveFigure = true;
+    private ?Figure $lastMoveFigure;
 
     public function __construct()
     {
@@ -56,15 +56,22 @@ class Board
         $xTo = $match[3];
         $yTo = $match[4];
 
-        if (isset($this->figures[$xFrom][$yFrom])) {
-            if ($this->lastMoveFigure === $this->figures[$xFrom][$yFrom]->isBlack()) {
-                throw new \Exception("Incorrect color");
-            }
-
-            $this->lastMoveFigure = $this->figures[$xFrom][$yFrom]->isBlack();
-
-            $this->figures[$xTo][$yTo] = $this->figures[$xFrom][$yFrom];
+        if (!isset($this->figures[$xFrom][$yFrom])) {
+            return;
         }
+
+        $movingFigure = $this->figures[$xFrom][$yFrom];
+
+        $isBlackLastMoveFigure = isset($this->lastMoveFigure) ? $this->lastMoveFigure->isBlack() : true;
+
+        if ($isBlackLastMoveFigure === $movingFigure->isBlack()) {
+            throw new \Exception("Incorrect color");
+        }
+
+        $this->lastMoveFigure = $movingFigure;
+
+        $this->figures[$xTo][$yTo] = $movingFigure;
+
         unset($this->figures[$xFrom][$yFrom]);
     }
 
