@@ -3,7 +3,7 @@
         'name' => 'johnnywoo/interview',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'd717370df7a4f652ff745d65d5b2b0874c385804',
+        'reference' => 'bd3475546a50fea96c69092de227bd69a6177671',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'johnnywoo/interview' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'd717370df7a4f652ff745d65d5b2b0874c385804',
+            'reference' => 'bd3475546a50fea96c69092de227bd69a6177671',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
