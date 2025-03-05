@@ -1,94 +1,72 @@
 <?php
 
+use PHPUnit\Framework\Attributes\Group;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 class Test extends \PHPUnit\Framework\TestCase {
-    /**
-     * @group rotation
-     * @group pawn
-     */
+    #[Group('rotation')]
+    #[Group('pawn')]
     public function testNoMoves() {
         $this->runFile('tests/001-no-moves.test');
     }
 
-    /**
-     * @group pawn
-     */
+    #[Group('pawn')]
     public function testSimpleError() {
         $this->runFile('tests/011-simple-error.test');
     }
 
-    /**
-     * @group rotation
-     * @group pawn
-     */
+    #[Group('rotation')]
+    #[Group('pawn')]
     public function testSimple() {
         $this->runFile('tests/012-simple-move.test');
     }
 
-    /**
-     * @group rotation
-     */
+    #[Group('rotation')]
     public function testColorRotationError() {
         $this->runFile('tests/013-color-rotation-error.test');
     }
 
-    /**
-     * @group rotation
-     * @group pawn
-     */
+    #[Group('rotation')]
+    #[Group('pawn')]
     public function testColorRotationCorrect() {
         $this->runFile('tests/014-color-rotation-correct.test');
     }
 
-    /**
-     * @group rotation
-     * @group pawn
-     */
+    #[Group('rotation')]
+    #[Group('pawn')]
     public function testPawnMovesOneSquareVertically() {
         $this->runFile('tests/021-pawn-moves-one-square-vertically.test');
     }
 
-    /**
-     * @group rotation
-     * @group pawn
-     */
+    #[Group('rotation')]
+    #[Group('pawn')]
     public function testPawnCanMoveTwoSquaresOnFirstMove() {
         $this->runFile('tests/022-pawn-can-move-two-squares-on-first-move.test');
     }
 
-    /**
-     * @group pawn
-     */
+    #[Group('pawn')]
     public function testPawnCanNotMoveDiagonally() {
         $this->runFile('tests/023-pawn-can-not-move-diagonally.test');
     }
 
-    /**
-     * @group rotation
-     * @group pawn
-     */
+    #[Group('rotation')]
+    #[Group('pawn')]
     public function testPawnCapturesDiagonally() {
         $this->runFile('tests/024-pawn-captures-diagonally.test');
     }
 
-    /**
-     * @group pawn
-     */
+    #[Group('pawn')]
     public function testPawnCanNotCaptureVertically() {
         $this->runFile('tests/025-pawn-can-not-capture-vertically.test');
     }
 
-    /**
-     * @group pawn
-     */
+    #[Group('pawn')]
     public function testPawnCanNotMoveFartherOneSquare() {
         $this->runFile('tests/026-pawn-can-not-move-farther-one-square.test');
     }
 
-    /**
-     * @group pawn
-     */
+    #[Group('pawn')]
     public function testPawnCanNotMoveAcrossFigure() {
         $this->runFile('tests/027-pawn-can-not-move-across-figure.test');
     }
