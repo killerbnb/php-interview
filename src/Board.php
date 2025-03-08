@@ -1,9 +1,13 @@
 <?php
 
-class Board {
+class Board
+{
     private $figures = [];
 
-    public function __construct() {
+    private ?Figure $lastMoveFigure;
+
+    public function __construct()
+    {
         $this->figures['a'][1] = new Rook(false);
         $this->figures['b'][1] = new Knight(false);
         $this->figures['c'][1] = new Bishop(false);
@@ -41,23 +45,49 @@ class Board {
         $this->figures['h'][8] = new Rook(true);
     }
 
-    public function move($move) {
+    public function move($move)
+    {
         if (!preg_match('/^([a-h])(\d)-([a-h])(\d)$/', $move, $match)) {
             throw new \Exception("Incorrect move");
         }
 
         $xFrom = $match[1];
         $yFrom = $match[2];
-        $xTo   = $match[3];
-        $yTo   = $match[4];
+        $xTo = $match[3];
+        $yTo = $match[4];
 
-        if (isset($this->figures[$xFrom][$yFrom])) {
-            $this->figures[$xTo][$yTo] = $this->figures[$xFrom][$yFrom];
+        if (!isset($this->figures[$xFrom][$yFrom])) {
+            return;
         }
+
+        /** @var Figure $movingFigure */
+        $movingFigure = $this->figures[$xFrom][$yFrom];
+
+        $isBlackLastMoveFigure = isset($this->lastMoveFigure) ? $this->lastMoveFigure->isBlack() : true;
+
+        if ($isBlackLastMoveFigure === $movingFigure->isBlack()) {
+            throw new \Exception("Incorrect color");
+        }
+
+        $movingFigure->checkMove(
+            new Path(
+                figures: $this->figures,
+                xFrom: $xFrom,
+                yFrom: $yFrom,
+                xTo: $xTo,
+                yTo: $yTo
+            )
+        );
+
+        $this->lastMoveFigure = $movingFigure;
+
+        $this->figures[$xTo][$yTo] = $movingFigure;
+
         unset($this->figures[$xFrom][$yFrom]);
     }
 
-    public function dump() {
+    public function dump()
+    {
         for ($y = 8; $y >= 1; $y--) {
             echo "$y ";
             for ($x = 'a'; $x <= 'h'; $x++) {
